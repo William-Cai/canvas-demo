@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>矩形其他操作</title>
+    <style type="text/css">
+        canvas {
+            border: 1px solid black;
+        }
+    </style>
+</head>
+<body onload="draw();">
+<canvas id="tutorial" width="200" height="200"></canvas>
+
+<script type="application/javascript">
+    function draw() {
+        var canvas = document.getElementById('tutorial');
+        if (canvas.getContext) {
+            var ctx = canvas.getContext('2d');
+
+            ctx.fillRect(50, 50, 100, 100);
+            ctx.clearRect(75,75, 50,50)
+            ctx.strokeRect(80, 80, 40, 40)
+        }
+    }
+</script>
+</body>
+</html>

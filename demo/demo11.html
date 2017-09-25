@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>使用虚线</title>
+    <style type="text/css">
+        canvas {
+            border: 1px solid black;
+        }
+    </style>
+</head>
+<body onload="draw();">
+<canvas id="tutorial" width="200" height="200"></canvas>
+
+<script type="application/javascript">
+    var offset = 0;
+    var canvas = document.getElementById('tutorial');
+
+    function draw() {
+        if (canvas.getContext) {
+            var ctx = canvas.getContext('2d');
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            // 虚线样式
+            ctx.setLineDash([4, 2]);
+            // 虚线偏移
+            ctx.lineDashOffset = -offset
+            ctx.strokeRect(10, 10, 100, 100);
+        }
+    }
+    
+    function march() {
+        offset++;
+        if(offset>16){
+            offset = 0;
+        }
+        draw();
+        requestAnimationFrame(march)
+    }
+
+    march();
+</script>
+</body>
+</html>

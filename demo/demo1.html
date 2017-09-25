@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>颜色和矩形</title>
+    <style type="text/css">
+        canvas {
+            border: 1px solid black;
+        }
+    </style>
+</head>
+<body onload="draw();">
+<canvas id="tutorial" width="200" height="200"></canvas>
+
+<script type="application/javascript">
+    function draw() {
+        var canvas = document.getElementById('tutorial');
+        if (canvas.getContext) {
+            var ctx = canvas.getContext('2d');
+            ctx.fillStyle = 'rgb(200,0,0)'
+            ctx.fillRect(25, 25, 50, 50);
+
+            ctx.fillStyle = 'rgba(0,0,200, 0.5)'; //透明度使得红色透过来
+            ctx.fillRect(50, 50, 50, 50)
+        }
+    }
+</script>
+</body>
+</html>

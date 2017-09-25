@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>绘制文本</title>
+    <style type="text/css">
+        canvas {
+            border: 1px solid black;
+        }
+    </style>
+</head>
+<body onload="draw();">
+<canvas id="tutorial" width="1000" height="500"></canvas>
+
+<script type="application/javascript">
+    var canvas = document.getElementById('tutorial');
+
+    function draw() {
+        if (canvas.getContext) {
+            var ctx = canvas.getContext('2d');
+            // todo 操作
+            ctx.font = "48px serif";
+            var str = "Hello World!"
+            ctx.fillText(str, 10, 50); //
+            ctx.strokeText(str, 10, 100); //文字边框
+            // font = value
+            //当前我们用来绘制文本的样式. 这个字符串使用和 CSS font 属性相同的语法. 默认的字体是 10px sans-serif。
+
+            // textAlign = value
+            //文本对齐选项. 可选的值包括：start, end, left, right or center. 默认值是 start。
+            var str1 = 'Hello'
+            ctx.font = "16px serif";
+            var textAlings = ['start', 'end', 'left', 'right', 'center'];
+            textAlings.forEach(function (item, index) {
+                ctx.strokeRect(index*150, 100, 150, 50)
+                ctx.textAlign = textAlings[index]
+                ctx.fillText(str1, index * 150, 150);
+
+            })
+
+            // textBaseline = value
+            //基线对齐选项. 可选的值包括：top, hanging, middle, alphabetic, ideographic, bottom。默认值是 alphabetic。
+            var str2 = 'World'
+            var textBaselines = ['top', 'hanging', 'middle', 'alphabetic', 'ideographic', 'bottom'];
+            textBaselines.forEach(function (item, index) {
+                ctx.strokeRect(index*150, 150, 150, 50)
+                ctx.textBaseline = textBaselines[index]
+                ctx.fillText(str2, index * 150, 200);
+            })
+            // direction = value
+            //文本方向。可能的值包括：ltr, rtl, inherit。默认值是 inherit。
+            var str3 = 'XXXXXX'
+            var directions = ['ltr', 'rtl', 'inherit'];
+            directions.forEach(function (item, index) {
+                ctx.strokeRect(index*150, 200, 150, 50)
+                ctx.direction = directions[index]
+                ctx.fillText(str3, index * 150, 250);
+
+            })
+        }
+    }
+</script>
+</body>
+</html>

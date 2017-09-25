@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>文字 阴影</title>
+    <style type="text/css">
+        canvas {
+            border: 1px solid black;
+        }
+    </style>
+</head>
+<body onload="draw();">
+<canvas id="tutorial" width="200" height="200"></canvas>
+
+<script type="application/javascript">
+    var canvas = document.getElementById('tutorial');
+
+    function draw() {
+        if (canvas.getContext) {
+            var ctx = canvas.getContext('2d');
+            // todo 操作
+            ctx.shadowOffsetX = 2
+            ctx.shadowOffsetY = 2
+            ctx.shadowBlur = 2
+            ctx.shadowColor = "rgba(200, 0, 0, 0.5)";
+
+            ctx.font = "20px Times New Roman";
+            ctx.fillStyle = "black";
+            ctx.fillText("Sample String", 5, 30);
+
+        }
+    }
+</script>
+</body>
+</html>

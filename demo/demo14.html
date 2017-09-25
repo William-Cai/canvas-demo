@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>图案样式 Patterns</title>
+    <style type="text/css">
+        canvas {
+            border: 1px solid black;
+        }
+    </style>
+</head>
+<body onload="draw();">
+<canvas id="tutorial" width="574" height="200"></canvas>
+
+<script type="application/javascript">
+    var canvas = document.getElementById('tutorial');
+
+    function draw() {
+        if (canvas.getContext) {
+            var ctx = canvas.getContext('2d');
+            // todo 操作
+            var img = new Image();
+            img.src = '../images/img1.png';
+            img.onload = function () {
+                var ptrn = ctx.createPattern(img, 'repeat');  //加载图片
+                ctx.fillStyle = ptrn;
+                ctx.fillRect(0, 0, 574, 96)
+            }
+
+            // 创建新 image 对象，用作图案
+            var img2 = new Image();
+            img2.src = '../images/img1.png';
+            img2.onload = function () {
+                // 创建图案
+                ctx.drawImage(img2, 0, 0, 574, 96, 0, 96, 574, 96);
+            }
+
+        }
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>线性渐变 Gradients</title>
+    <style type="text/css">
+        canvas {
+            border: 1px solid black;
+        }
+    </style>
+</head>
+<body onload="draw();">
+<canvas id="tutorial" width="200" height="200"></canvas>
+
+<script type="application/javascript">
+    var canvas = document.getElementById('tutorial');
+
+    function draw() {
+        if (canvas.getContext) {
+            var ctx = canvas.getContext('2d');
+            // todo 操作
+            // 表示渐变的起点 (x1,y1) 与终点 (x2,y2)。
+            var lineargradient = ctx.createLinearGradient(0,0,0,200);
+            // position 参数必须是一个 0.0 与 1.0 之间的数值，表示渐变中颜色所在的相对位置。
+            // 例如，0.5 表示颜色会出现在正中间。color 参数必须是一个有效的 CSS 颜色值（如 #FFF， rgba(0,0,0,1)，等等）
+            lineargradient.addColorStop(0, '#00ABEB');
+            lineargradient.addColorStop(0.5, '#fff');
+            lineargradient.addColorStop(0.5, '#26C000');
+            lineargradient.addColorStop(1, '#fff');
+
+            var lineargradient2 = ctx.createLinearGradient(0,50,0,95);
+            lineargradient2.addColorStop(0.5, '#000');
+            lineargradient2.addColorStop(1, 'rgba(0,0,0,0)');
+
+            ctx.fillStyle = lineargradient;
+            ctx.strokeStyle = lineargradient2;
+
+            // draw shapes
+            ctx.fillRect(0,0,200,200);
+            ctx.strokeRect(50,50,100,100);
+        }
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<canvas id="canvas">你的浏览器不支持canvas，请跟换其他浏览器试一试</canvas>
+<button onclick="ctrl()">暂停</button>
+
+<script type="application/javascript">
+
+    function ctrl() {
+        window.pause = !window.pause
+    }
+
+    var pause = true;
+    window.onload = function () {
+        var canvas = document.getElementById('canvas');
+        canvas.height = 728;
+        canvas.width = 1024;
+        var context = canvas.getContext('2d');
+        context.fillStyle = 'red';
+        context.beginPath();
+        context.arc(800, 300, 30, 0, 2 * Math.PI, true);
+        context.closePath();
+        context.fill();
+        run(context);
+    };
+    var speed = 0;
+    var startPoint = 800;
+
+    function run(cxt) {
+        if (pause) {
+            speed = -7;
+            cxt.clearRect(0, 0, 1024, 728);
+            //cxt.top+=speed;
+            startPoint += speed;
+            cxt.beginPath();
+            if (startPoint < 0) {
+                startPoint = 800;
+            }
+            cxt.arc(startPoint, 300, 30, 0, 2 * Math.PI, true);
+            cxt.closePath();
+            cxt.fill();
+
+        }
+        requestAnimationFrame(function(){
+            run(cxt)
+        })
+
+    }
+</script>
+</body>
+</html>
