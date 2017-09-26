@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>旋转 Rotating</title>
+    <style type="text/css">
+        canvas {
+            border: 1px solid black;
+        }
+    </style>
+</head>
+<body onload="draw();">
+<canvas id="tutorial" width="200" height="200"></canvas>
+
+<script type="application/javascript">
+    var canvas = document.getElementById('tutorial');
+
+    // rotate(angle)
+    //这个方法只接受一个参数：旋转的角度(angle)，它是顺时针方向的，以弧度为单位的值。
+    function draw() {
+        if (canvas.getContext) {
+            var ctx = canvas.getContext('2d');
+            // todo 操作
+            ctx.translate(75, 75); //改变原点
+
+            for (var i = 1; i < 6; i++) { // 圈数
+                ctx.save();
+                ctx.fillStyle = 'rgb(' + (51 * i) + ',' + (255 - 51 * i) + ',255)';
+
+                for (var j = 0; j < i * 6; j++) { // 画多少个圆
+                    ctx.rotate(Math.PI * 2 / (i * 6)); //旋转角度
+                    ctx.beginPath();
+                    ctx.arc(0, i * 12.5, 5, 0, Math.PI * 2, true);
+                    ctx.fill();
+                }
+
+                ctx.restore();
+            }
+        }
+    }
+</script>
+</body>
+</html>
