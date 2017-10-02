@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>图像的组合&混合-2混合</title>
+    <style type="text/css">
+        canvas {
+            border: 1px solid black;
+        }
+    </style>
+</head>
+<body onload="draw()">
+<h2></h2>
+<canvas id="tutorial" width="200" height="200"></canvas>
+<button onclick="btnClick(-1)">上一个</button>
+<button onclick="btnClick(1)">下一个</button>
+<button onclick="btnClick(0)">动画</button>
+
+<script type="application/javascript">
+    var canvas = document.getElementById('tutorial');
+
+    let i = 0;
+    let animateFlag = false
+
+    function draw() {
+        if (canvas.getContext) {
+            var ctx = canvas.getContext('2d');
+            // todo 操作
+            window.oprtns = new Array(...[
+                'normal', //默认值
+                'darken',
+                'lighten',
+                'multiply',
+                'screen',
+                'color-dodge',
+                'hard-light',
+                'soft-light',
+                'overlay',
+                'difference',
+                'exclusion'
+            ])
+
+            if (i >= oprtns.length) i = 0
+
+            ctx.clearRect(0, 0, canvas.width, canvas.height)
+            ctx.save()
+
+            ctx.fillStyle = 'blue'
+            ctx.fillRect(10, 10, 60, 60)
+
+            ctx.globalCompositeOperation = oprtns[i]
+            document.querySelector('h2').innerText = oprtns[i]
+            ctx.beginPath()
+            ctx.fillStyle = 'red'
+            ctx.arc(60, 60, 30, 0, Math.PI * 2, false)
+            ctx.fill()
+            ctx.restore()
+        }
+    }
+
+    function animation() {
+        window.t = setInterval(function () {
+            if (animateFlag) {
+                draw()
+                i++
+            }
+        }, 1000)
+    }
+    animation()
+
+    function btnClick(t) {
+        if (i - 1 <= 0) {
+            i = 1
+        }
+        if (t > 0) {
+            i++
+        } else if (t === 0) {
+            animateFlag = !animateFlag
+        }
+        else {
+            i--
+        }
+        draw();
+    }
+
+</script>
+</body>
+</html>
