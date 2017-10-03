@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>缩放和反锯齿</title>
+    <style type="text/css">
+        canvas {
+            border: 1px solid black;
+        }
+    </style>
+</head>
+<body onload="draw();">
+
+<canvas id="tutorial" width="200" height="200">
+    你的浏览器不支持HTML5
+</canvas>
+<canvas id="zoom" width="300" height="227"></canvas>
+<div>
+    <label for="smoothbtn">
+          <input type="checkbox" name="smoothbtn" checked="checked" id="smoothbtn">
+          Enable image smoothing
+    </label>
+</div>
+
+<script type="application/javascript">
+    var canvas = document.getElementById('tutorial');
+    var ctx = canvas.getContext('2d');
+
+    function draw() {
+        // todo 操作
+        var img = new Image();
+        img.src = '../images/img1.png';
+        img.onload = function() {
+            ctx.drawImage(img, 0, 0);
+            img.style.display = 'none';
+            console.log(this)
+            draw2(this)
+        };
+    }
+
+    function draw2() {
+
+        var zoomctx = document.getElementById('zoom').getContext('2d');
+
+        var smoothbtn = document.getElementById('smoothbtn');
+        var toggleSmoothing = function(event) {
+            zoomctx.imageSmoothingEnabled = this.checked;
+            zoomctx.mozImageSmoothingEnabled = this.checked;
+            zoomctx.webkitImageSmoothingEnabled = this.checked;
+            zoomctx.msImageSmoothingEnabled = this.checked;
+        };
+        smoothbtn.addEventListener('change', toggleSmoothing);
+
+        var zoom = function(event) {
+            var x = event.layerX;
+            var y = event.layerY;
+            zoomctx.drawImage(canvas,
+                Math.abs(x - 5),
+                Math.abs(y - 5),
+                10, 10,
+                0, 0,
+                200, 200);
+        };
+
+        canvas.addEventListener('mousemove', zoom);
+    }
+</script>
+</body>
+</html>

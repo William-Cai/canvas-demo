@@ -10,17 +10,18 @@
     </style>
 </head>
 <body onload="draw();">
-<canvas id="tutorial" width="200" height="200"></canvas>
+
+<canvas id="tutorial" width="200" height="200">
+    你的浏览器不支持HTML5
+</canvas>
 
 <script type="application/javascript">
     var canvas = document.getElementById('tutorial');
+    var ctx = canvas.getContext('2d');
 
     function draw() {
-        if (canvas.getContext) {
-            var ctx = canvas.getContext('2d');
-            // todo 操作
+        // todo 操作
 
-        }
     }
 </script>
 </body>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>操作像素-ImageData对象</title>
+    <style type="text/css">
+        canvas {
+            border: 1px solid black;
+        }
+    </style>
+</head>
+<body onload="draw();">
+<canvas id="tutorial" width="200" height="200"></canvas>
+
+<script type="application/javascript">
+    var canvas = document.getElementById('tutorial');
+    var ctx = canvas.getContext('2d');
+
+
+    function draw() {
+        ctx.fillStyle = 'rgba(55,55,55,.8)'
+        ctx.fillRect(0, 0, canvas.width, canvas.height)
+        var img = new Image()
+        img.src = '../images/max.png'
+        img.onload = function () {
+            ctx.drawImage(img, 0, 0)
+            draw2()
+        }
+
+        var img2 = new Image()
+        img2.src = '../images/img1.png'
+        img2.onload = function () {
+
+        }
+    }
+
+    function draw2() {
+        var imageData = ctx.getImageData(0, 0, 33, 33)
+        console.log('imageData', imageData)
+
+
+        var myImageData = ctx.createImageData(imageData); //这个个新的对象像素全部被预设为透明黑。这个并非复制了图片数据。
+        console.log('myImageData', myImageData)
+
+
+        ctx.putImageData(myImageData, 33, 33); //透明黑
+
+
+        ctx.putImageData(imageData, 66, 66); // 类似在新的位置复制了新图片
+
+
+    }
+
+</script>
+</body>
+</html>

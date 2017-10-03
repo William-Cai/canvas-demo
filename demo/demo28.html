@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>像素操作-获取像素</title>
+    <style type="text/css">
+        canvas {
+            border: 1px solid black;
+        }
+    </style>
+</head>
+<body onload="draw();">
+<canvas id="tutorial" width="200" height="200">
+    你的浏览器不支持HTML5
+</canvas>
+
+<div id="color"></div>
+<div id="info"></div>
+
+<script type="application/javascript">
+    var canvas = document.getElementById('tutorial');
+    var ctx = canvas.getContext('2d');
+
+    var color = document.getElementById('color');
+    var info = document.getElementById('info');
+
+    function draw() {
+        var img = new Image();
+        img.src = '../images/img1.png';  //加载其他域的图片，下面getImageData会出现跨域问题
+        img.onload = function () {
+            ctx.drawImage(img, 0, 0);
+            img.style.display = 'none';
+        };
+    }
+
+    /**
+     * 选取颜色
+     * @param event
+     */
+    function pick(event) {
+        var x = event.layerX;
+        var y = event.layerY;
+        var pixel = ctx.getImageData(x, y, 1, 1);
+        var data = pixel.data;
+        var rgba = 'rgba(' + data[0] + ',' + data[1] +
+            ',' + data[2] + ',' + (data[3] / 255) + ')'; //最后一个表示透明度
+        color.style.background =  rgba;
+        color.textContent = rgba;
+
+        info.textContent = data.join(',')
+    }
+
+    /**
+     * 添加事件
+     */
+    canvas.addEventListener('mousemove', pick);
+</script>
+</body>
+</html>

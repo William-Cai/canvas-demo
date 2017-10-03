@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>输出图片</title>
+    <style type="text/css">
+        canvas {
+            border: 1px solid black;
+        }
+    </style>
+</head>
+<body onload="draw();">
+
+<canvas id="tutorial" width="33" height="33">
+    你的浏览器不支持HTML5
+</canvas>
+<br>
+<h2>输出到img标签</h2>
+<img id="to" src="" alt="输出图片位置">
+
+<h2>下载连接</h2>
+<a id="down" href="">下载</a>
+
+<script type="application/javascript">
+    var canvas = document.getElementById('tutorial');
+    var ctx = canvas.getContext('2d');
+
+    var exportImage = document.getElementById('to')
+    var downImg = document.getElementById('down')
+
+    function draw() {
+        // todo 操作
+        var img = new Image();
+        img.src = '../images/max.png'
+        img.onload = function () {
+            ctx.drawImage(img, 0, 0)
+            //canvas.toDataURL('image/png', quality)   quality: 0 -> 1
+            let type = 'jpeg'
+            let data = canvas.toDataURL(type, 1)
+            console.log(data);
+
+
+            // 图片
+            exportImage.src = data
+
+            // 下载
+            let downloadImgData = data.replace(_fixType(type), 'image/octet-stream');
+            console.log('downloadImgData', downloadImgData)
+            downImg.href = downloadImgData
+        }
+    }
+
+    var _fixType = function (type) {
+        type = type.toLowerCase().replace(/jpg/i, 'jpeg');
+        var r = type.match(/png|jpeg|bmp|gif/)[0];
+        console.log('r', r)
+        return 'image/' + r;
+    };
+</script>
+</body>
+</html>
